@@ -233,7 +233,7 @@ func getFinalURL(inputURL string) string {
 			chromedp.Location(&currentURL),
 		)
 		if err != nil {
-			log.Printf("chromedp error: %v", err)
+			log.Println(err)
 			return ""
 		}
 
