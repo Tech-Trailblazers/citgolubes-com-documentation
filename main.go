@@ -229,7 +229,7 @@ func getFinalURL(inputURL string) string {
 		err := chromedp.Run(ctx,
 			chromedp.Navigate(inputURL),
 			chromedp.WaitReady("body", chromedp.ByQuery),
-			chromedp.Sleep(1*time.Second), // let JS/meta redirects fire
+			chromedp.Sleep(3*time.Second), // let JS/meta redirects fire
 			chromedp.Location(&currentURL),
 		)
 		if err != nil {
@@ -247,7 +247,7 @@ func getFinalURL(inputURL string) string {
 		inputURL = currentURL
 
 		// Safety cutoff
-		if time.Since(start) > (2 * time.Minute) {
+		if time.Since(start) > (3 * time.Minute) {
 			log.Printf("redirect loop timeout at: %s", currentURL)
 			return currentURL
 		}
